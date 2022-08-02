@@ -70,7 +70,6 @@ class Nexus(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.error(f'Error adding {username}')
             self.logger.info(json.loads(str(e)).get('error_message'))
-            pass
 
     def list_users(self) -> list:
         """

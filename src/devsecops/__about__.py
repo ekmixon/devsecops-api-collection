@@ -24,7 +24,7 @@ __status__      = "Development"  # noqa: E221
 __author__      = "James Harmison"  # noqa: E221
 __email__       = "jharmison@redhat.com"  # noqa: E221
 __license__     = "BSD-2-Clause"  # noqa: E221
-__copyright__   = "2020 %s" % __author__  # noqa: E221
+__copyright__ = f"2020 {__author__}"
 
 __requires__ = [
     'click',

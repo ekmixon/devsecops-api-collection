@@ -36,9 +36,12 @@ def determine_version():
                 'git rev-list --tags --no-walk --max-count=1'
             )
             if latest_commit != latest_tag_commit:
-                pkg_ver += '.dev{}'.format(shell_run(
-                    'git rev-list {}..HEAD --count'.format(latest_tag_commit)
-                ))
+                pkg_ver += '.dev{}'.format(
+                    shell_run(
+                        f'git rev-list {latest_tag_commit}..HEAD --count'
+                    )
+                )
+
             tree_dirty = shell_run('git diff HEAD')
             if tree_dirty != '':
                 pkg_ver += '-DIRTY'

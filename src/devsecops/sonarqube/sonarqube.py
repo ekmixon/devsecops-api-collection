@@ -102,7 +102,6 @@ class SonarQube(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.error(f'Error adding {username}')
             self.logger.error(json.loads(str(e))['error_message'])
-            pass
 
     def search_users(self, username: str = None) -> list:
         """
@@ -115,7 +114,6 @@ class SonarQube(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.warning(f'No response from query for  {username}')
             self.logger.warning(json.loads(str(e))['error_message'])
-            pass
 
     def update_setting(self, setting_name: str,
                        setting_value: str = None) -> requests.Response:
@@ -132,4 +130,3 @@ class SonarQube(BaseApiHandler):
                 f'Error setting {setting_name} to value {setting_value}'
             )
             self.logger.exception("Update setting error", exc_info=True)
-            pass

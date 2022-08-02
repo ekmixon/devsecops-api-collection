@@ -67,7 +67,6 @@ class Quay(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.warning(f'Unable to add {username}')
             self.logger.info(json.loads(str(e)).get('error_message'))
-            pass
 
     def add_org(self, org_name: str = None) -> requests.Response:
         """
@@ -75,20 +74,26 @@ class Quay(BaseApiHandler):
         organization was created.
         """
         try:
-            return self.api_req('post', 'organization', data={
-                'name': org_name,
-                'email': 'devsecops_{}@{}'.format(
-                    ''.join(random.choice(string.ascii_letters)
-                            for i in range(10)),
-                    '.'.join(
-                        self.base_url.strip('/').split('/')[-1].split('.')[-2:]
-                    )
-                )
-            }, ok=[201])
+            return self.api_req(
+                'post',
+                'organization',
+                data={
+                    'name': org_name,
+                    'email': 'devsecops_{}@{}'.format(
+                        ''.join(
+                            random.choice(string.ascii_letters) for _ in range(10)
+                        ),
+                        '.'.join(
+                            self.base_url.strip('/').split('/')[-1].split('.')[-2:]
+                        ),
+                    ),
+                },
+                ok=[201],
+            )
+
         except UnexpectedApiResponse as e:
             self.logger.warning(f'Unable to add {org_name}')
             self.logger.info(json.loads(str(e)).get('error_message'))
-            pass
 
     def add_app(self, org_name: str = None, app_name: str = None,
                 description: str = None) -> requests.Response:
@@ -108,7 +113,6 @@ class Quay(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.warning(f'Unable to add {app_name}')
             self.logger.info(json.loads(str(e)).get('error_message'))
-            pass
 
     def add_repo(self, org_name: str = None, repo_name: str = None,
                 description: str = None) -> requests.Response:
@@ -130,7 +134,6 @@ class Quay(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.warning(f'Unable to add {repo_name}')
             self.logger.info(json.loads(str(e)).get('error_message'))
-            pass
 
     def get_robot(self, org_name: str = None,
                   robot_name: str = None) -> requests.Response:
@@ -146,7 +149,6 @@ class Quay(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.warning(f'Unable to find {robot_name}')
             self.logger.info(json.loads(str(e)).get('error_message'))
-            pass
 
     def add_robot(self, org_name: str = None, robot_name: str = None,
                   description: str = None) -> requests.Response:
@@ -167,4 +169,3 @@ class Quay(BaseApiHandler):
         except UnexpectedApiResponse as e:
             self.logger.warning(f'Unable to add {robot_name}')
             self.logger.info(json.loads(str(e)).get('error_message'))
-            pass
